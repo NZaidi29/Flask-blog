@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1 class="centertxt">Welcome to my blog assessment &#x1F60E</h1>
+<p>Hello, and welcome to my blog. This blog was created as part of a university assessment. It was created using Flask, MySQL, HTML and CSS.
+For this reason it meets certain assessment requirements but does not have every feature I would want to implement for a regular blog, I
+do intend to work on it after this assignment to add more features and functionality.</p>
+<p>You will find to the right there is a selection of featured blog posts, please feel free to read them. If you are
+   looking for any particular topic feel free to search for a keyword in the search bar.
+    You may also register for an account, save or like posts and leave comments. &#x1F604</p>
+<p>Working on this project was an interesting experience and has definitely made me appreciate the work thats goes into sites
+  like Facebook or Youtube with so much dynamic content and also with such massive databases. I feel like I learned a lot during
+   the process of making this and hopefully can do more interesting projects like this both on my own and through my course.</p>
+{% endblock content %}
+
+{% block sidebar %}
+<div id="flashes">
+  {% with messages = get_flashed_messages() %}
+   {% if messages %}
+    <ul>
+     {% for message in messages %}
+      <li>{{ message }}</li>
+     {% endfor %}
+    </ul>
+   {% endif %}
+  {% endwith %}
+</div>
+<h2 class="centertxt">Featured Posts</h2>
+{% for post in featured %}
+<div class="post">
+ <a href="{{url_for('post', post_id=post.id)}}"><img src="{{ url_for('static', filename='img/' + post.image_file) }}"></a>
+ <div class="details">
+  <h3 style="margin:0; padding:3px;" class='serif'><a href="{{url_for('post', post_id=post.id)}}">{{post.title}}</a></h3>
+  <p class="italic">{{post.content[0:100]}}...</p>
+  <small style="margin-top:auto;">by {{post.user.username}}</small>
+  <small style="margin-bottom: 5px;">Posted on: {{post.date}}</small>
+ </div>
+</div>
+{% endfor %}
+{% endblock sidebar %}

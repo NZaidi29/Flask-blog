@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1>Hello, {{current_user.firstname}}! Welcome to your profile.</h1>
+<p>From here you can see all the comments you have left on posts and manage your list of favourite posts.</p>
+
+<h2 class="centertxt">Favourite Posts</h2>
+
+{% for post in posts %}
+<div class="post">
+ <a href="{{url_for('post', post_id=post.id)}}"><img src="{{ url_for('static', filename='img/' + post.image_file) }}"></a>
+ <div class="details">
+  <h3 style="margin:0; padding:3px;" class="serif"><a href="{{url_for('post', post_id=post.id)}}">{{post.title}}</a></h3>
+  <p class="italic">{{post.content[0:200]}}...</p>
+  <small style="margin-top:auto;">by {{post.user.username}}</small>
+  <small style="margin-bottom: 5px;">Posted on: {{post.date}}</small>
+  <a class="right" href="{{ url_for('unfavourite', post_id=post.id, username=current_user.username)}}"><button type="button">Remove from favourites</button></a>
+ </div>
+</div>
+{% endfor %}
+
+{% if posts==[] %}
+<p class="centertxt italic">You have no favourite posts.</p>
+{% endif %}
+
+{% endblock content %}
+
+{% block sidebar %}
+<div id="flashes">
+  {% with messages = get_flashed_messages() %}
+   {% if messages %}
+    <ul>
+     {% for message in messages %}
+      <li>{{ message }}</li>
+     {% endfor %}
+    </ul>
+   {% endif %}
+  {% endwith %}
+</div>
+
+<h2 class="centertxt">Your Comments</h2>
+
+<table class="fullwidth">
+{% for comment in comments %}
+  <tr>
+  <td><small>Post title: {{comment.post.title}}</small><p class="centertxt">You said: {{comment.content}}</p></td>
+  </tr>
+{% endfor %}
+</table>
+
+{% if comments.count()==0 %}
+<p class="centertxt italic">You have not left any comments yet.</p>
+{% endif %}
+
+{% endblock sidebar %}

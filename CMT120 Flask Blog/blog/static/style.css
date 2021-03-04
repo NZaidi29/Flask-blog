@@ -1,0 +1,184 @@
+/* Reference for code used for #navbar, #navbar a, #navbar a:hover */
+/* Date accessed: 01/02/2021 */
+/* https://www.w3schools.com/css/css_navbar_horizontal.asp */
+#navbar{
+  overflow: hidden;
+  background-color: rgba(75, 0, 130, 1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+#navbar a{
+  float: left;
+  display: block;
+  color: rgb(230, 230, 250);
+  text-align: center;
+  padding: 10px 14px;
+  text-decoration: none;
+}
+
+#navbar a:hover{
+  background: rgb(230, 230, 250);
+  color: rgb(75, 0, 130);
+}
+
+#navbar .right{
+  float: right;
+}
+
+#navbar form{
+  margin-top: 8px;
+}
+
+body{
+  margin: 0;
+  margin-top: 38px;
+  font-family: Helvetica, Arial, sans-serif;
+  min-height: 93.4vh;
+  position: relative;
+}
+
+.grid {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 65px;
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+  left: 0;
+  width: 100%;
+}
+
+#sidebar{
+  padding: 10px;
+  grid-column: 4 / span 2;
+  grid-row: 1;
+}
+
+#content{
+  padding: 10px;
+  grid-column: 1 / 4;
+  grid-row: 1;
+}
+
+#page{
+  grid-column: 2 / 5;
+  grid-row: 1 / span 3;
+}
+
+.footer{
+  background-color: rgba(230, 230, 250, 1);
+  width: 100%;
+  height: 60px;
+  position: absolute;
+  bottom: 0;
+}
+
+.footer a{
+  float: right;
+  display: block;
+  padding: 20px 14px;
+  text-decoration: none;
+}
+
+.details{
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  flex: 1 1 60%;
+  align-items: flex-start;
+}
+
+.post{
+  padding: 5px;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(230, 230, 250);
+  transition: transform .2s;
+  border-radius: 5px;
+  color: rgb(75, 0, 130);
+}
+
+.post img{
+  height: 30vh;
+  width: 20vw;
+  flex: 1 1 40%;
+  border-radius: 5px;
+}
+/* Reference for how to enlarge objects on hover .post:hover*/
+/* Accessed on: 11/02/2021 */
+/* https://www.w3schools.com/howto/howto_css_zoom_hover.asp */
+.post:hover{
+  transform: scale(1.02);
+}
+
+.post p{
+  margin: 0;
+  padding: 2px;
+}
+
+.fullpostimg{
+  width: 100%;
+}
+
+table{
+  border-collapse: collapse;
+  border: 1px solid rgb(230, 230, 250);
+}
+
+tr:nth-child(odd) {
+  background-color: rgb(230, 230, 250);
+}
+
+button{
+  background-color: rgb(75, 0, 130);
+  color: rgb(230, 230, 250);
+  border-radius: 5px;
+}
+
+a:link {
+  color: rgb(75, 0, 130);
+  text-decoration: none;
+}
+
+.centertxt{
+  text-align: center;
+}
+
+.centered{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fullwidth{
+  width: 100%;
+}
+
+.right{
+  align-self: flex-end;
+}
+
+.rightalign{
+  text-align: right;
+}
+
+.serif{
+  font-family: serif;
+}
+
+.blank tr, .blank table{
+  background-color: white;
+  border: 1px solid white;
+}
+
+.italic{
+  font-style: italic;
+  color: rgba(75, 0, 130, 0.6);
+}
+
+.error{
+  color: red;
+}

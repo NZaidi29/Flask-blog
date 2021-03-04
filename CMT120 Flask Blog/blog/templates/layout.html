@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Assessment Blog</title>
+  <link rel=stylesheet type=text/css href="{{ url_for('static',filename='style.css') }}">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='img/N.jpg') }}">
+</head>
+
+<header>
+  <div id="navbar" class="serif">
+    <a href="{{ url_for('home')}}">Home</a>
+    <a href="{{ url_for('allposts')}}">Blog Posts</a>
+    <a href="{{ url_for('about')}}">About Me</a>
+    {% if current_user.is_authenticated %}
+    <a class="right" href="{{ url_for('logout')}}">Logout</a>
+    <a class="right" href="{{ url_for('profile', username=current_user.username)}}">Hello, {{current_user.firstname}}</a>
+    {% else %}
+    <a class="right" href="{{ url_for('login')}}">Login</a>
+    <a class="right" href="{{ url_for('register')}}">Register</a>
+    <a class="right" href="{{ url_for('home')}}">Hello, Guest</a>
+    {% endif %}
+    <form  class="right" method="POST" action="{{ url_for('search') }}">
+      {{search.csrf_token}}
+      {{ search.query }}
+      <input type="submit" value="Search">
+    </form>
+  </div>
+</header>
+
+<body>
+
+<div class="grid">
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+  <div id="page">
+    {% block page %}
+    {% endblock %}
+  </div>
+
+  <div id="sidebar">
+    {% block sidebar %}
+    {% endblock %}
+  </div>
+
+</div>
+
+  <div class="footer">
+    <div class="centertxt">
+    <a href="https://uk.linkedin.com/in/noorzaidi" target="_blank">LinkedIn</a>
+    <a href="https://git.cardiff.ac.uk/c1706191" target="_blank">GitLab</a>
+  </div>
+  </div>
+
+</body>
+</html>

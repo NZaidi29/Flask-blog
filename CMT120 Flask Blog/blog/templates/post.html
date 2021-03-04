@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block page %}
+<div id="flashes">
+  {% with messages = get_flashed_messages() %}
+   {% if messages %}
+    <ul>
+     {% for message in messages %}
+      <li>{{ message }}</li>
+     {% endfor %}
+    </ul>
+   {% endif %}
+  {% endwith %}
+</div>
+
+<img class="fullpostimg" src="{{ url_for('static', filename='img/' + post.image_file) }}">
+<h1 class="centertxt">{{post.title}}</h1>
+<table class="fullwidth blank">
+<tr>
+
+<td><small>Author: {{post.user.username}}<br>Date Posted: {{post.date}}</small></td>
+
+<td class="rightalign">
+<small>Likes: {{post.likes()}}</small>
+
+{% if current_user.is_authenticated %}
+{% if current_user in post.followers %}
+<a href="{{ url_for('favourite', post_id=post.id)}}" class="rightalign"><button type="button">Remove from favourites</button></a>
+{% else %}
+<a href="{{ url_for('favourite', post_id=post.id)}}" class="rightalign"><button type="button">Add to favourites</button></a>
+{% endif %}
+{% if current_user in post.likers %}
+<a href="{{ url_for('like', post_id=post.id)}}"><button type="button">Unlike</button></a>
+{% else %}
+<a href="{{ url_for('like', post_id=post.id)}}"><button type="button">Like</button></a>
+{% endif %}
+{% endif %}
+</td>
+</tr>
+</table>
+
+{% for paragraph in paragraphs %}
+<p>{{paragraph}}</p>
+{% endfor %}
+
+<h2 class="centertxt">Comments</h2>
+<table class="fullwidth">
+  <colgroup>
+       <col span="1" style="width: 15%;">
+       <col span="1" style="width: 70%;">
+       <col span="1" style="width: 15%;">
+    </colgroup>
+{% for comment in comments %}
+<tr>
+<td><p class="rightalign">{{comment.user.username}} says:</p></td>
+<td><p>"{{comment.content}}"</p></td>
+<td><p>{{comment.date}}</p></td>
+</tr>
+{% endfor %}
+</table>
+
+{% if current_user.is_authenticated %}
+<form method="POST" action="{{url_for('post_comment', post_id=post.id)}}">
+  {{form.hidden_tag()}}
+  <div class="centertxt">
+    {{form.comment(cols="97.5")}}
+    {% for error in form.comment.errors %}
+    <span style="color:red;">[{{error}}]</span>
+    {% endfor %}
+  </div>
+  <div class="rightalign">
+    {{form.submit()}}
+  </div>
+</form>
+{% endif %}
+{% endblock page %}

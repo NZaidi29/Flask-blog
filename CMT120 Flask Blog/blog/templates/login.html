@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block page %}
+
+<h1 class="centertxt">Log In</h1>
+<div id="flashes" class="error">
+  {% with messages = get_flashed_messages() %}
+   {% if messages %}
+    <ul>
+     {% for message in messages %}
+      <li>{{ message }}</li>
+     {% endfor %}
+    </ul>
+   {% endif %}
+  {% endwith %}
+</div>
+<form method="POST" class="centertxt">
+  {{form.csrf_token}}
+  {{form.email.label}}<br>{{form.email}}
+  <br>
+  {{form.csrf_token}}
+  {{form.password.label}}<br>{{form.password}}
+  <br>
+  <input type="submit" value="Login">
+</form>
+
+{% endblock page %}
